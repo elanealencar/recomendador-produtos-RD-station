@@ -34,13 +34,12 @@ function App() {
       <main className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-8 md:py-10">
         <section className="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm text-center">
         <h2 className="mb-2 text-3xl font-bold text-slate-900">
-          Bem-vindo ao Recomendador de Produtos da <span className="text-blue-900">RD Station</span>!
+          Bem-vindo ao Recomendador de Produtos <span className="text-blue-900">RD Station</span>!
         </h2>
-        <h3 className="text-2xl">Encontre a solução ideal para o seu negócio</h3>
+        <h3 className="text-2xl">Encontre a solução ideal para o seu negócio!</h3>
         <p className="text-lg leading-relaxed text-slate-600 my-2">
-          Use o formulário abaixo para selecionar suas preferências e funcionalidades desejadas. 
-          Nós vamos analisar os produtos da RD Station e recomendar as soluções que mais se encaixam 
-          no seu contexto, seja para vendas, marketing, atendimento ou inteligência artificial.
+          De CRM a Marketing, de Conversas a Inteligência Artificial, temos uma solução para ajudar você a alcançar seus objetivos. 
+          Use o formulário abaixo para selecionar suas preferências e funcionalidades desejadas, e nós vamos analisar os produtos da RD Station e recomendar as soluções personalizadas que mais melhor atendam às suas necessidades. 
         </p>
         </section>
 
