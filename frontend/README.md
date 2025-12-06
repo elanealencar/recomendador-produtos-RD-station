@@ -13,9 +13,14 @@ Aplicação React responsável por:
 
 > 🔗 **Link da aplicação em produção:**  
 
+http://recomendador-produtos-rd-station.vercel.app/
 
-Em ambiente de desenvolvimento, o frontend consome os dados a partir do json-server.
-Em produção (ex.: deploy na Vercel) e nos testes, a aplicação utiliza o mockProducts local (src/mocks/mockProducts.js) para garantir uma demo estável.
+Em ambiente de desenvolvimento, o frontend consome os dados a partir do json-server  
+(`http://localhost:3001/products`).
+
+Em produção (Vercel) e nos testes, a aplicação utiliza o `mockProducts` local  
+(`src/mocks/mockProducts.js`), garantindo uma demo estável sem depender do backend.
+
 
 ---
 
@@ -26,8 +31,8 @@ Em produção (ex.: deploy na Vercel) e nos testes, a aplicação utiliza o mock
 ![Tela inicial](./src/assets/initial_page_RD_station.png)
 
 - **Recomendações em cards com links**
-  
-![Single Product](./src/assets/single_product_RD_station.png)
+
+![Single Product](./src/assets/single_product_RD_Station.png)
 
 ![Multiple Products](./src/assets/multiple_products_RD_station.png)
 

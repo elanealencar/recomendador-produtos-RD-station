@@ -7,6 +7,13 @@ O projeto está organizado em formato de **monorepo**, com backend (json-server)
 > 🔍 Para detalhes da implementação do frontend (arquitetura, hooks, serviços e testes), veja também:  
 > [`frontend/README.md`](./frontend/README.md)
 
+Para facilitar a visualização da solução, subi também uma versão em produção do frontend:
+
+👉 **Demo:** http://recomendador-produtos-rd-station.vercel.app/
+
+> A demo utiliza os mesmos dados de produtos do desafio, porém consumidos a partir de um mock local (`mockProducts`) em vez do `json-server`, garantindo estabilidade no ambiente de produção.  
+> O fluxo completo com `json-server` continua disponível para execução local, conforme descrito abaixo.
+
 ## 📂 Estrutura do projeto
 
 ```bash
@@ -51,7 +58,7 @@ nvm use 18.3
 ```
 Após instalar a versão correta do Node.js, você pode prosseguir com a instalação das dependências do projeto e iniciar o desenvolvimento.
 
-## ▶️ Como Executar
+## Como Executar
 
 1. Clone o repositório: `git clone <URL_DO_REPOSITORIO>`
 2. Instale as dependências: `yarn install`
@@ -69,7 +76,7 @@ backend (json-server): http://localhost:3001/products
 - `start:backend`: Inicia apenas a parte backend da aplicação em modo de desenvolvimento.
 - `dev`: Inicia simultaneamente a parte frontend e backend da aplicação em modo de desenvolvimento.
 
-## 🧠 Visão geral da solução
+## Visão geral da solução
 
 A solução foi pensada com foco em:
 
@@ -146,27 +153,27 @@ Mais detalhes estão descritos em frontend/README.md
 ## 📋 Critérios de Aceite
 
 1. Receber preferências e funcionalidades via formulário
-- O formulário (Form) coleta selectedPreferences, selectedFeatures e selectedRecommendationType.
+    - O formulário (Form) coleta selectedPreferences, selectedFeatures e selectedRecommendationType.
 
 2. Retornar recomendações baseadas nas seleções
-- recommendation.service.getRecommendations(formData, products) aplica a lógica de scoring com base nas seleções.
+    - recommendation.service.getRecommendations(formData, products) aplica a lógica de scoring com base nas seleções.
 
 3. Modo SingleProduct
-- Retorna um único produto (objeto) com maior score.
-- Em caso de empate, o critério escolhido foi “retornar o último produto entre os empatados”.
+    - Retorna um único produto (objeto) com maior score.
+    - Em caso de empate, o critério escolhido foi “retornar o último produto entre os empatados”.
 
 4. Modo MultipleProducts
-- Retorna uma lista de produtos que atendem às preferências/funcionalidades.
-- Em caso de nenhum match, retorna [].
+    - Retorna uma lista de produtos que atendem às preferências/funcionalidades.
+    - Em caso de nenhum match, retorna [].
 
 5. Critério de empate
-- Em caso de empate de score, o serviço seleciona o último produto válido, atendendo ao critério definido no enunciado.
+    - Em caso de empate de score, o serviço seleciona o último produto válido, atendendo ao critério definido no enunciado.
 
 6. Diferentes tipos de preferências/funcionalidades
-- O serviço trabalha com arrays de strings (preferências e features) e calcula o score com pesos diferentes (preferências > features).
+    - O serviço trabalha com arrays de strings (preferências e features) e calcula o score com pesos diferentes (preferências > features).
 
 7. Modularidade e extensibilidade
-- recommendation.service é um módulo independente, facilmente extensível para:
+    - recommendation.service é um módulo independente, facilmente extensível para:
 novos produtos, novos critérios de pontuação, novos tipos de recomendação.
 
 ## Autor
