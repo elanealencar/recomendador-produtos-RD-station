@@ -23,13 +23,13 @@ Em produção (ex.: deploy na Vercel) e nos testes, a aplicação utiliza o mock
 
 - **Tela inicial / formulário**
 
-![Tela inicial](./assets/initial_page_RD_station.png)
+![Tela inicial](./src/assets/initial_page_RD_station.png)
 
 - **Recomendações em cards com links**
   
-![Single Product](./assets/single_product_RD_station.png)
+![Single Product](./src/assets/single_product_RD_station.png)
 
-![Multiple Products](./assets/multiple_products_RD_station.png)
+![Multiple Products](./src/assets/multiple_products_RD_station.png)
 
 ---
 
