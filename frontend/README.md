@@ -1,70 +1,224 @@
-# Getting Started with Create React App
+# Frontend – Recomendador de Produtos RD Station
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicação React responsável por:
 
-## Available Scripts
+- coletar preferências e funcionalidades desejadas pelo usuário;
+- consultar os produtos da API (json-server);
+- aplicar a lógica de recomendação por **score**;
+- exibir as recomendações em **cards informativos**, com link direto para a página oficial de cada produto RD Station.
 
-In the project directory, you can run:
+---
 
-### `yarn start`
+## 🌐 Demonstração
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> 🔗 **Link da aplicação em produção:**  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `yarn test`
+Em ambiente de desenvolvimento, o frontend consome os dados a partir do json-server.
+Em produção (ex.: deploy na Vercel) e nos testes, a aplicação utiliza o mockProducts local (src/mocks/mockProducts.js) para garantir uma demo estável.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `yarn build`
+## 🖼️ Screenshots
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Tela inicial / formulário**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Tela inicial](./assets/initial_page_RD_station.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Recomendações em cards com links**
+  
+![Single Product](./assets/single_product_RD_station.png)
 
-### `yarn eject`
+![Multiple Products](./assets/multiple_products_RD_station.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Tecnologias utilizadas
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **React.js** 
+- **Tailwind CSS** – estilização e layout responsivo
+- **Axios** – consumo da API fake (json-server)
+- **Jest + React Testing Library** – testes unitários
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## ▶️ Como rodar o frontend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Certifique-se de que está dentro da pasta `frontend`:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+cd frontend
+yarn install
+yarn start
+```
+Por padrão, a aplicação sobe em:
+http://localhost:3000
+⚠️ Importante: o backend (json-server) deve estar rodando em http://localhost:3001/products
+(subido a partir da pasta backend usando yarn start ou o script do monorepo).
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🧩 Estrutura do frontend
+```bash
+src/
+├── App.js
+├── assets/
+│   └── logo.svg
+├── components/
+│   ├── Form/
+│   │   ├── Form.js
+│   │   ├── Fields/
+│   │   │   ├──Features.js
+│   │   │   ├──Preferences.js
+│   │   │   └──RecommendationType.js
+│   │   └── SubmitButton/
+│   │       └──SubmitButton.js
+│   ├── RecommendationList/
+│   │   └── RecommendationList.js
+│   └── shared/
+│       └── Checkbox.js
+├── hooks/
+│   ├── useForm.js
+│   ├── useProducts.js
+│   └── useRecommendations.js
+└── services/
+    ├── product.service.js
+    └── recommendation.service.js
+```
 
-### Analyzing the Bundle Size
+## 🎨 Diferenciais de implementação no frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Além de atender aos requisitos do desafio, foram implementadas melhorias para tornar a solução mais robusta, legível e agradável:
 
-### Making a Progressive Web App
+- Layout aprimorado com Tailwind
+- Header com: logo da RD Station, título claro da aplicação, subtítulo contextualizando o desafio técnico.
+- Layout em grid:
+lado esquerdo: formulário de seleção (preferências, funcionalidades, tipo de recomendação),
+lado direito: lista de recomendações em destaque.
+Uso de cards, espaçamento e tipografia pensados para leitura rápida.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Lógica de Recomendação do projeto
 
-### Advanced Configuration
+A lógica de recomendação foi centralizada em recommendation.service.js e funciona por pontuação:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Cálculo de score
+Para cada produto, é calculado um score numérico com base nas seleções do usuário:
+  - Cada preferência selecionada que aparece em product.preferences → +2 pontos cada
+  - Cada funcionalidade selecionada que aparece em product.features → +1 ponto cada
 
-### Deployment
+Isso permite priorizar produtos que atendem melhor às preferências do usuário, e ainda considerar funcionalidades como fator complementar.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Filtros ativos
 
-### `yarn build` fails to minify
+- Se o usuário selecionar pelo menos uma preferência ou funcionalidade, apenas produtos com score > 0 são considerados candidatos.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Se o usuário não selecionar nenhum critério, todos os produtos são considerados, com score inicial 0. Esse comportamento permite, por exemplo, mostrar um “catálogo” básico mesmo sem filtros.
+
+### Modos de Recomendação
+
+O serviço suporta dois modos:
+  - SingleProduct: 
+    - retorna um único produto, aquele com maior score;
+    - em caso de empate, retorna o último produto entre os empatados (critério pedido no desafio).
+
+  - MultipleProducts:
+    - retorna uma lista de produtos que atendem ao filtro;
+    - se não houver match, retorna [].
+
+Também foram tratados cenários especiais:
+  - quando não há produtos disponíveis;
+  - quando nenhum critério é selecionado;
+  - quando o tipo de recomendação não é informado (fallback para SingleProduct).
+
+## 🧾 Cards informativos com link “Saiba mais”
+
+Cada recomendação é exibida como um card, contendo:
+- nome do produto (ex.: RD Conversas);
+- categoria;
+- um conjunto resumido de preferências/funcionalidades;
+- um link “Saiba mais” apontando para a página oficial do produto
+
+## 🧠 Arquitetura do frontend
+
+### App.js: 
+- Controla o estado de recommendations.
+- Renderiza:
+  - o header com logo + contexto,
+  - um texto introdutório explicando o propósito do recomendador,
+  - a estrutura em grid com:
+    `<Form />` (entrada),
+    `<RecommendationList />` (saída).
+
+Fluxo principal:
+  1. O Form recebe uma função onRecommendationsChange.
+  2. Quando o usuário envia o formulário, o Form chama o service de recomendação.
+  3. O resultado é normalizado e enviado para o App via onRecommendationsChange.
+  4. O App passa a lista final para <RecommendationList />, que exibe os cards.
+
+### Hooks
+`useProducts`:
+
+Responsável por:
+  - Buscar os produtos da API (product.service).
+  - Popular:
+      - products: lista completa de produtos,
+      - preferences: subconjunto de preferências extraídas dos produtos,
+      - features: subconjunto de funcionalidades.
+
+`useForm`:
+
+Hook simples e genérico para controle do estado de formulário:
+  - formData: estado atual do formulário.
+  - handleChange(field, value): atualiza qualquer campo de forma declarativa.
+
+`useRecommendations`:
+Função responsável por conectar o React ao serviço de recomendação
+
+## 🧪 Testes
+- Como rodar os testes
+
+Na pasta frontend:
+```bash
+yarn test
+```
+
+- Cobertura implementada:
+  - `services/recommendation.service.test.js`
+    - Recomendações em modo:
+      SingleProduct (produto único, melhor score, empate → último match),
+      MultipleProducts (lista de matches).
+    - Cenários sem match (retorno null / [] conforme o modo).
+    - Comportamento quando não há produtos disponíveis.
+    - Comportamento quando o tipo de recomendação não é informado (fallback).
+  
+  - `hooks/useProducts.test.js`
+    - Garante que:
+      getProducts é chamado uma única vez,
+      products recebe o retorno da API, 
+      preferences e features são montados a partir dos produtos,
+      erros ao buscar produtos não quebram o hook (tratamento de erro com console.error).
+
+  - `hooks/useRecommendations.test.js`
+    - Garante que:
+      recommendationService.getRecommendations é chamado com formData e products,
+      o valor retornado pelo service é repassado corretamente pelo hook.
+  
+  - `components/Form/Form.test.js`
+    - Garante que:
+    ao submeter o formulário, getRecommendations é chamado,
+    o retorno (objeto ou lista) é normalizado para lista,
+    onRecommendationsChange é chamado com o array final de recomendações.
+
+## 🔮 Possíveis evoluções
+
+Algumas ideias futuras para expansão da solução:
+  - Ajustar pesos de score (ex.: permitir que o usuário dê mais peso para certas preferências).
+  - Mostrar “por que esse produto foi recomendado” (ex.: destacar tags que bateram com o filtro).
+  - Melhorar acessibilidade (foco visível, ARIA, navegação por teclado em todos os campos e cards).
+  - Salvar últimas recomendações no localStorage para manter o estado entre reloads.
+
+
+## 👤 Autora
+
+Desenvolvido por [Elane Alencar](https://linkedin.com/in/elanealencar/)
+Candidata à vaga de Pessoa Engenheira de Software Frontend (Jr/Pleno) – RD Station.
