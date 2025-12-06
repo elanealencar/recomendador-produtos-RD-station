@@ -1,4 +1,5 @@
 import axios from 'axios';
+import mockProducts from '../mocks/mockProducts';
 
 const baseURL = 'http://localhost:3001';
 const isDev = process.env.NODE_ENV === 'development';

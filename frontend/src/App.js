@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Form from './components/Form/Form';
 import RecommendationList from './components/RecommendationList/RecommendationList';
-import Logo from './logo.svg';
+import Logo from './assets/logo.svg';
 
 function App() {
   const [recommendations, setRecommendations ] = useState([])
